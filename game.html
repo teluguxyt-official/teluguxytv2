@@ -1,0 +1,476 @@
+<html>
+<head>
+    <title>Web Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.6), 0 0 30px rgba(255, 0, 0, 0.4);
+        }
+        .period {
+            border: 2px solid red;
+            padding: 10px;
+            display: inline-block;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .period span {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .period-number {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .content {
+            border: 2px solid red;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .details {
+            text-align: left;
+            margin-left: 20px;
+            flex-grow: 1;
+        }
+        .details h2 {
+            font-size: 24px;
+            margin: 0;
+            text-shadow: 2px 2px 4px #000000;
+            color: #ff0000;
+        }
+        .details .item {
+            border: 2px solid red;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+        .details .item span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .details .item input[type="checkbox"] {
+            transform: scale(1.5);
+        }
+        .result {
+            border: 2px solid red;
+            padding: 50px;
+            font-size: 36px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            text-shadow: 2px 2px 4px #000000;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            transition: background-color 0.3s ease;
+            display: none;
+        }
+        .button:hover {
+            background-color: darkred;
+        }
+        .social-buttons {
+            display: flex;
+            flex-direction: row;
+            margin-top: 60px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .social-button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 10px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        .social-button i {
+            margin-right: 10px;
+        }
+        .social-button:hover {
+            background-color: darkred;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+        #prediction-result {
+            display: none;
+        }
+        .CircularImage {
+            border-radius: 50%;
+            width: 100%;
+            height: auto;
+            max-width: 120px;
+            max-height: 100%;
+            overflow: hidden;
+        }
+        @media only screen and (max-width: 768px) {
+            #CircularImage {
+                display: none;
+            }
+        }
+        .progress-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div style="overflow-y: auto; height: 100%;">
+        <div class="container">
+            <div class="period glow">
+                <span>
+                    PERIOD NO :- <span class="font-bold" id="gameID">wait.....</span>
+                </span>
+            </div>
+            <div class="content glow">
+                <div class="details">
+                    <h2>TELUGU X YT</h2>
+                    <div class="item">
+                        <span>BIG MUMBAI BAYPASS</span>
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <div class="item">
+                        <span>1 MIN WINGO HACK</span>
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <div class="item">
+                        <span>SATRT HACK</span>
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                </div>
+            </div>
+            <div class="result glow" id="prediction"></div>
+            <button class="button glow" id="prediction-button" data-game-id="123" style="display: none;">RESULT</button>
+            <div class="social-buttons">
+                <a href="javascript:void(0);" class="social-button glow" id="youtube-button">
+                    <i class="fab fa-youtube"></i> YouTube
+                </a>
+                <a href="javascript:void(0);" class="social-button glow" id="telegram-button">
+                    <i class="fab fa-telegram-plane"></i> Telegram
+                </a>
+            </div>
+            <div class="footer glow">
+                &copy; TELUGU X YT MODS
+            </div>
+        </div>
+        <div id="prediction-result">
+            <p id="prediction"></p>
+        </div>
+        <div class="progress-dialog" id="progress-dialog">
+            <p>Loading...</p>
+        </div>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script>
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ff0000"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        },
+                        "image": {
+                            "src": "img/github.svg",
+                            "width": 100,
+                            "height": 100
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#ff0000",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 6,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 400,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            document.querySelectorAll('.checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const allChecked = Array.from(document.querySelectorAll('.checkbox')).every(cb => cb.checked);
+                    document.querySelector('.button').style.display = allChecked ? 'block' : 'none';
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                let GAMEID = "";
+
+                function startTypingAnimation(text, gameIDElement) {
+                    let index = 0;
+                
+                    const typingInterval = setInterval(function() {
+                        gameIDElement.textContent += text[index];
+                        index++;
+                        if (index >= text.length) {
+                            clearInterval(typingInterval);
+                        }
+                    }, 50); // Typing speed in milliseconds
+                }
+
+                function getGameID(updatedGameID){
+                    const now = new Date();
+                    const currentMinute = now.getHours() * 60 + now.getMinutes() + 1;
+                    const gameID = `${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate()}01${currentMinute.toString().padStart(4, '0')}`;
+                    if (GAMEID !== gameID + updatedGameID){
+                        document.getElementById("prediction-result").style.display = 'none';
+                        var gameIDElem = document.getElementById("gameID")
+                        gameIDElem.textContent = ""
+                        startTypingAnimation(gameID, gameIDElem)
+                    }
+                    GAMEID = gameID + updatedGameID;
+                }
+
+                function delayedPrediction(gameID) {
+                    const currentMinute = (new Date()).getMinutes(); // Get the current minute
+                    let savedPrediction = localStorage.getItem('prediction_' + gameID); // Retrieve the saved prediction
+                    let savedMinute = localStorage.getItem('minute_' + gameID); // Retrieve the saved minute
+
+                    console.log(`delayedPrediction gameID: ${gameID}, savedPrediction: ${savedPrediction}, savedMinute: ${savedMinute}`);
+                    
+                    // Check if there's a saved prediction and it's from the same minute
+                    if (savedPrediction && savedMinute && parseInt(savedMinute) === currentMinute) {
+                        // Use the saved prediction
+                        document.getElementById("prediction").textContent = savedPrediction;
+                        console.log("Got saved prediction: " + savedPrediction);
+                    } else {
+                        // Generate a new prediction with percentage
+                        const predictions = [
+                            { result: 'BIG', percentage: 70 },
+                            { result: 'SMALL', percentage: 30 }
+                        ];
+                        const randomIndex = Math.floor(Math.random() * 100);
+                        const randomPrediction = randomIndex < predictions[0].percentage ? predictions[0].result : predictions[1].result;
+                    
+                        // Save the new prediction and current minute
+                        localStorage.setItem('prediction_' + gameID, randomPrediction);
+                        localStorage.setItem('minute_' + gameID, currentMinute);
+                    
+                        // Display the new prediction
+                        document.getElementById("prediction").textContent = randomPrediction;
+                        console.log("Got random prediction: " + randomPrediction);
+                    }
+                        
+                    document.getElementById("prediction-result").style.display = 'block';
+                    playSuccessSound();
+                }
+
+                function playSuccessSound() {
+                    const audio = new Audio('success.mp3'); // Replace with the path to your success sound file
+                    audio.play();
+                }
+                
+                let updatedGameID = "";
+                document.getElementById('prediction-button').addEventListener('click', function() {
+                    updatedGameID = this.getAttribute('data-game-id');
+                    console.log(updatedGameID);
+
+                    // Show the progress dialog
+                    const progressDialog = document.getElementById('progress-dialog');
+                    progressDialog.style.display = 'block';
+
+                    setTimeout(function() {
+                        delayedPrediction(updatedGameID);
+
+                        // Hide the progress dialog after 3 seconds
+                        progressDialog.style.display = 'none';
+                    }, 3000);
+                });
+
+                setInterval(function() {
+                    getGameID(updatedGameID);
+                }, 1000);
+            });
+
+            // Get the button and text elements
+            const button = document.getElementById('prediction-button');
+            const textElement = document.getElementById('prediction');
+
+            // Add an event listener to the button
+            button.addEventListener('click', () => {
+                // Show the text after 3 seconds
+                setTimeout(() => {
+                    textElement.style.display = 'block';
+                }, 3000);
+
+                // Hide the text again after another 3 seconds
+                setTimeout(() => {
+                    textElement.style.display = 'none';
+                }, 6000);
+            });
+
+            // Add event listeners for YouTube and Telegram buttons
+            document.getElementById('youtube-button').addEventListener('click', function() {
+                window.location.href = 'https://youtube.com/@teluguxyt?si=buDKabLucoF8Ae0M';
+            });
+
+            document.getElementById('telegram-button').addEventListener('click', function() {
+                window.location.href = 'https://t.me/+QoVXsMn50RVkZjE1';
+            });
+        </script>
+    </div>
+</body>
+</html>
